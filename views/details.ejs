@@ -1,0 +1,77 @@
+
+<link rel="stylesheet" href="/css/details.css">
+<!-- heading -->
+<div id="heading">
+    <h1>
+        <span><i class="fa fa-chevron-left"></i></span>
+    </h1>
+    <h1>
+        Weekly Summary(<span id="month-name">July 2020</span>)
+    </h1>
+    <h1>
+    <span><i class="fa fa-chevron-right"></i></span>
+    </h1>
+ 
+</div>
+<!-- container for habits -->
+<div class="container rounded bg-white shadow p-3 mb-5" id="box">
+    <!-- list for habits -->
+    <div>
+        <ul class="week-days" id="weekname">
+            <li class="list-group-item day-name"><strong>Today/26</strong></li>
+            <li class="list-group-item day-name">MON/25</li>
+            <li class="list-group-item day-name">TUE/24</li>
+            <li class="list-group-item day-name">WED/23</li>
+            <li class="list-group-item day-name">THUR/22</li>
+            <li class="list-group-item day-name">FRI/21</li>
+            <li class="list-group-item day-name">SAT/20</li>
+        </ul>
+        <ul class="list-group" id="habits">
+            <%for(let i of habit_list){%>
+            <li class="list-group-item list-group-item-info habit">
+                <div class="row habit-streak">
+                    <span id="habit-name"><h4><%= i.habit %></h4> </span>
+                    <%if(i.end!=""){ %>
+                    <p class="col-lg-3">Ending on : <%=i.end%></p>
+                    <%}else{%>
+                    <p class="col-lg-3">Building this forever</p>
+                    <%}%>
+                    <p class="col-lg-3">Streak : <%=i.streak%>/7</p>
+                    <p class="col-lg-3"> <%=i.time%> <%=i.frequency%></p>
+                </div>
+                <!-- List to show the week days record -->
+                <ul class ="week-days">
+                    <form action="/details/update-habit/?id=<%=i._id%>&day=one&val=<%=i.days.one%>" method="POST">
+                        <button class="list-group-item days" type="submit"><%=i.days.one%></button>
+                    </form>
+                    <form action="/details/update-habit/?id=<%=i._id%>&day=two&val=<%=i.days.two%>" method="POST">
+                        <button class="list-group-item days" type="submit"><%=i.days.two%></button>
+                    </form>
+                    <form action="/details/update-habit/?id=<%=i._id%>&day=three&val=<%=i.days.three%>" method="POST">
+                        <button class="list-group-item days" type="submit"><%=i.days.three%></button>
+                    </form>
+                    <form action="/details/update-habit/?id=<%=i._id%>&day=four&val=<%=i.days.four%>" method="POST">
+                        <button class="list-group-item days" type="submit"><%=i.days.four%></button>
+                    </form>
+                    <form action="/details/update-habit/?id=<%=i._id%>&day=five&val=<%=i.days.five%>" method="POST">
+                        <button class="list-group-item days" type="submit"><%=i.days.five%></button>
+                    </form>
+                    <form action="/details/update-habit/?id=<%=i._id%>&day=six&val=<%=i.days.six%>" method="POST">
+                        <button class="list-group-item days" type="submit"><%=i.days.six%></button>
+                    </form>
+                    <!-- Shows Todays Record -->
+                    <form action="/details/update-habit/?id=<%=i._id%>&day=seven&val=<%=i.days.seven%>" method="POST">
+                        <button class="list-group-item days" type="submit"><%=i.days.seven%></button>
+                    </form>
+                    
+                </ul>
+                
+            </li>
+            <%}%>
+          </ul>
+    </div>
+
+</div>
+<!-- using moment js -->
+<script type="text/javascript" src="/js/moment.js"></script>
+<script type="text/javascript" src="/js/details.js"></script>

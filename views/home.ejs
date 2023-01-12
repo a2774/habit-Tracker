@@ -1,0 +1,77 @@
+<link rel="stylesheet" href="/css/home.css">
+<!-- container for habits -->
+<div class="container rounded bg-white shadow p-3 mb-5" id="box">
+    <!-- input to add habits -->
+    <div id="add-habit-form" class="rounded bg-blue shadow p-3 mb-5">
+        <form action="/create-habit" method="POST" >
+            <div class="form-group">
+                <label for="inputAddress">What habit you want to Create?</label>
+                <input type="text" class="form-control" id="inputAddress" name="habit" placeholder="Enter the name" required>
+            </div>
+            <div class="form-group">
+                <label for="inputAddress2">What do you want to Achieve?</label>
+                <input type="text" class="form-control" id="inputAddress2" name="description" placeholder="Enter your goal" required>
+            </div>
+              
+            <div class="form-group">
+                <label for="inputEnd">End Date(Optional)</label>
+                <input type="date" class="form-control" name="end" id="inputEnd">
+            </div>
+            <div class="form-group">
+                <label for="inputEnd">Time</label>
+                <input type="time" class="form-control" name="time" id="inputEnd" required>
+            </div>
+            <div class="form-group ">
+                <label for="inputState">Frequency</label>
+                <select id="inputState" class="form-control" name="frequency">
+                    <option>Twice a Day</option>
+                    <option selected>Daily</option>
+                    <option>Weekly</option>
+                </select>
+            </div>
+                
+            <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i> Create Habit</button>
+            <button type="button" class="btn btn-danger" id="cancel-habit"><i class="fa fa-times"></i> Cancel</button>
+    
+        </form>
+    </div>
+    
+        <button class="btn btn-success" id="btn-add-habit"><i class="fa fa-plus"></i> Add New Habit</button>
+        <a class="btn btn-primary" href="/details" role="button" id="btn-streak"><i class="fa fa-check"></i> Show My Streak</a>
+
+    <!-- list for habits -->
+    <div>
+        <ul class="list-group" id="habits">
+            <%for(let i of habit_list){%>
+            <li class="list-group-item list-group-item-success habit">
+                <div class="habit-info">
+                    <!-- <span><i class="fa fa-check"></i></span> -->
+                    <span id="habit-name"><h4><%= i.habit %></h4> </span>
+                    <div>
+                        <form action="/details/update-habit/?id=<%=i._id%>&day=one&val=<%=i.days.one%>" method="POST" id="streak-container">
+                            <button class="btn btn-change-status" type="submit"><%=i.days.one%></button>
+                        </form>
+                        <a class="btn btn-danger" href="/delete-habit/?id=<%=i._id%>">
+                            <i class="fa fa-times"></i> Remove
+                        </a>
+                    </div>
+                    
+                </div>
+                <div class="row habit-streak">
+                    <%if(i.end!=""){ %>
+                    <p class="col-lg-3">Ending on : <%=i.end%></p>
+                    <%}else{%>
+                    <p class="col-lg-3">Building this forever</p>
+                    <%}%>
+                    <p class="col-lg-3"><%=i.description%></p>
+                    <p class="col-lg-3">Streak :<%=i.streak%>/7</p>
+                    <p class="col-lg-3"> <%=i.time%> <%=i.frequency%></p>
+                </div>
+                
+            </li>
+            <%}%>
+          </ul>
+    </div>
+
+</div>
+<script  type="text/javascript" src="/js/home.js"></script>
